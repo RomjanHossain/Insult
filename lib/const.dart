@@ -11,3 +11,8 @@ Shader linearGradient = LinearGradient(
     Color(0xfffb8080),
   ],
 ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+const textSTyle = TextStyle(
+  color: Colors.black,
+  fontSize: 30,
+);
