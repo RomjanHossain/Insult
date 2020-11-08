@@ -27,7 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height,
-        color: Colors.white,
         child: TinderSwapCard(
           swipeUp: true,
           swipeDown: true,
