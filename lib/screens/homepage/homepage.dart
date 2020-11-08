@@ -16,12 +16,14 @@ class HomePage extends StatefulWidget {
     WordList(),
     Profile(),
   ];
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,9 +55,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomBar(
         sInd: _selectedIndex,
         onp: (index) {
+          Provider.of<Data>(context, listen: false).getAllSlang();
           setState(() {
             _selectedIndex = index;
-
             print(_selectedIndex);
           });
         },
