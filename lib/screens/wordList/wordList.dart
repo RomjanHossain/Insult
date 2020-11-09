@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alphabet_list_scroll_view/alphabet_list_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -6,7 +8,6 @@ class User {
   final String name;
   final String company;
   final bool favourite;
-
   User(this.name, this.company, this.favourite);
 }
 
@@ -68,26 +69,27 @@ class _WordListState extends State<WordList> {
                 onTap: () {},
               ),
             ],
-            child: ListTile(
-              leading: Stack(
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage("http://placeimg.com/200/200/people"),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF5a5c6a).withOpacity(1.0),
+                      Color(0xFF202d3a).withOpacity(1.0)
+                    ],
                   ),
-                  Container(
-                      height: 40,
-                      width: 40,
-                      child: Center(
-                        child: Icon(
-                          Icons.star,
-                          color: Colors.yellow[100],
-                        ),
-                      ))
-                ],
+                ),
+                child: Stack(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
-              title: Text(user.name),
-              subtitle: Text(user.company),
             ),
           ),
         );
@@ -106,13 +108,23 @@ class _WordListState extends State<WordList> {
                 onTap: () {},
               ),
             ],
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    NetworkImage("http://placeimg.com/200/200/people"),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              //! I removed ListTile and added Container for using card insted of Tile xD
+              child: Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                          .withOpacity(1.0),
+                      Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                          .withOpacity(1.0)
+                    ],
+                  ),
+                ),
               ),
-              title: Text(user.name),
-              subtitle: Text(user.company),
             ),
           ),
         );
@@ -152,7 +164,7 @@ class _WordListState extends State<WordList> {
       headerWidgetList: <AlphabetScrollListHeader>[
         AlphabetScrollListHeader(widgetList: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: TextFormField(
               controller: searchController,
               decoration: InputDecoration(
