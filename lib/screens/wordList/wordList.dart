@@ -53,84 +53,105 @@ class _WordListState extends State<WordList> {
           .toLowerCase()
           .contains(searchController.text.toLowerCase()));
     }
-    users.forEach((user) {
-      if (user.favourite) {
-        favouriteList.add(
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.25,
-            secondaryActions: <Widget>[
-              IconSlideAction(
-                iconWidget: Icon(Icons.star),
-                onTap: () {},
-              ),
-              IconSlideAction(
-                iconWidget: Icon(Icons.more_horiz),
-                onTap: () {},
-              ),
-            ],
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF5a5c6a).withOpacity(1.0),
-                      Color(0xFF202d3a).withOpacity(1.0)
-                    ],
-                  ),
+    users.forEach(
+      (user) {
+        if (user.favourite) {
+          favouriteList.add(
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              // actionExtentRatio: 0.25,
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  iconWidget: Icon(Icons.star, color: Colors.black),
+                  onTap: () {},
                 ),
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.white,
+                IconSlideAction(
+                  iconWidget: Icon(Icons.edit, color: Colors.black),
+                  onTap: () {},
+                ),
+              ],
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF5a5c6a).withOpacity(1.0),
+                        Color(0xFF202d3a).withOpacity(1.0)
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      } else {
-        normalList.add(
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.25,
-            secondaryActions: <Widget>[
-              IconSlideAction(
-                iconWidget: Icon(Icons.star),
-                onTap: () {},
-              ),
-              IconSlideAction(
-                iconWidget: Icon(Icons.more_horiz),
-                onTap: () {},
-              ),
-            ],
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              //! I removed ListTile and added Container for using card insted of Tile xD
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                          .withOpacity(1.0),
-                      Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                          .withOpacity(1.0)
+                  ),
+                  child: Column(
+                    children: [
+                      Text('Asshole',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                          )),
+                      Text(
+                          'it means from where you  sdkjfslkdjfslkdjfslkdjf;lksare do pooping lol')
                     ],
                   ),
                 ),
               ),
             ),
-          ),
-        );
-        strList.add(user.name);
-      }
-    });
+          );
+        } else {
+          normalList.add(
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  iconWidget: Icon(
+                    Icons.star,
+                    color: Colors.black,
+                  ),
+                  onTap: () {},
+                ),
+                IconSlideAction(
+                  iconWidget: Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                  onTap: () {},
+                ),
+              ],
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                //! I removed ListTile and added Container for using card insted of Tile xD
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                            .withOpacity(1.0),
+                        Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                            .withOpacity(1.0)
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text('Asshole',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                          )),
+                      Text(
+                          'it means from where you  sdkjfslkdjfslkdjfslkdjf;lksare do pooping lol')
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+          strList.add(user.name);
+        }
+      },
+    );
 
     setState(() {
       strList;
@@ -158,7 +179,7 @@ class _WordListState extends State<WordList> {
         return normalList[index];
       },
       indexedHeight: (i) {
-        return 80;
+        return 200;
       },
       keyboardUsage: true,
       headerWidgetList: <AlphabetScrollListHeader>[
@@ -179,11 +200,12 @@ class _WordListState extends State<WordList> {
           )
         ], icon: Icon(Icons.search), indexedHeaderHeight: (index) => 80),
         AlphabetScrollListHeader(
-            widgetList: favouriteList,
-            icon: Icon(Icons.star),
-            indexedHeaderHeight: (index) {
-              return 80;
-            }),
+          widgetList: favouriteList,
+          icon: Icon(Icons.star),
+          indexedHeaderHeight: (index) {
+            return 200;
+          },
+        ),
       ],
     );
   }
