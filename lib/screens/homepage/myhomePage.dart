@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:insult/models/allProvider.dart';
+import 'package:insult/models/api/getResultfromAPI.dart';
 import 'package:provider/provider.dart';
 
 import '../../const.dart';
@@ -11,16 +12,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<Insults> futureInsult;
+  @override
+  void initState() {
+    super.initState();
+    futureInsult = fetchAlbum2();
+  }
+
   CardController controller;
 
-  List<String> welcomeImages = [
-    "assets/welcome0.png",
-    "assets/welcome1.png",
-    "assets/welcome2.png",
-    "assets/welcome2.png",
-    "assets/welcome1.png",
-    "assets/welcome1.png"
-  ];
+  // List<String> welcomeImages = [
+  //   "assets/welcome0.png",
+  //   "assets/welcome1.png",
+  //   "assets/welcome2.png",
+  //   "assets/welcome2.png",
+  //   "assets/welcome1.png",
+  //   "assets/welcome1.png"
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           swipeUp: true,
           swipeDown: true,
           orientation: AmassOrientation.BOTTOM,
-          totalNum: welcomeImages.length,
+          totalNum: 5,
           stackNum: 3,
           swipeEdge: 4,
           maxWidth: Provider.of<Data>(context).oriented
@@ -60,9 +68,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            child: Text(
-              welcomeImages[index],
-              style: textSTyle,
+            child: FutureBuilder<Insults>(
+              future: futureInsult,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    snapshot.data.insult,
+                    style: bestQuote,
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                return Text('loading.........');
+              },
             ),
           ),
           cardController: controller = CardController(),
