@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:insult/const.dart';
 import 'package:insult/widgets/btn.dart';
+import 'package:insult/widgets/profile_wid/customPaint.dart';
 import 'package:insult/widgets/profile_wid/myCard.dart';
 
 class Profile extends StatelessWidget {
@@ -22,23 +22,26 @@ class Profile extends StatelessWidget {
           alignment: Alignment.center,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 10,
+              horizontal: 5,
               // vertical: 10,
             ),
             child: CustomPaint(
               painter: RPSCustomPainter(),
               child: Container(
                 alignment: Alignment.center,
-                height: 400,
+                height: 430,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    SizedBox(
+                      height: 18,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 4.5,
-                          width: MediaQuery.of(context).size.width / 3,
+                          width: MediaQuery.of(context).size.width / 2.2,
                           child: MyCard(
                             Icons.favorite,
                             'Favourite',
@@ -46,7 +49,7 @@ class Profile extends StatelessWidget {
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 4.5,
-                          width: MediaQuery.of(context).size.width / 3,
+                          width: MediaQuery.of(context).size.width / 2.2,
                           child: MyCard(
                             Icons.edit,
                             'edited',
@@ -55,16 +58,16 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 4.5,
-                          width: MediaQuery.of(context).size.width / 3,
+                          width: MediaQuery.of(context).size.width / 2.2,
                           child: MyCard(Icons.whatshot, 'whatshot'),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 2.2,
                             child: MyCard(Icons.whatshot_rounded, 'rounded')),
                       ],
                     ),
@@ -74,42 +77,14 @@ class Profile extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
+        Positioned(
+          top: MediaQuery.of(context).size.height / 1.4,
+          left: MediaQuery.of(context).size.width / 2.6,
           child: MyBtn(() {
             print('jslkdjf');
-          }, 'Log Out'),
+          }, 'Log Out', Colors.blueGrey),
         )
       ],
     );
-  }
-}
-
-class RPSCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint_0 = new Paint()
-      ..color = primaryColor
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1;
-
-    Path path_0 = Path();
-    path_0.moveTo(0, size.height);
-    path_0.lineTo(0, 0);
-    path_0.quadraticBezierTo(size.width * 0.23, 0, size.width * 0.31, 0);
-    path_0.cubicTo(size.width * 0.43, size.height * 0.15, size.width * 0.57,
-        size.height * 0.15, size.width * 0.69, 0);
-    path_0.quadraticBezierTo(size.width * 0.77, 0, size.width, 0);
-    path_0.lineTo(size.width, size.height);
-    path_0.lineTo(size.width * 0.50, size.height);
-    path_0.lineTo(0, size.height);
-    path_0.close();
-
-    canvas.drawPath(path_0, paint_0);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }
