@@ -16,3 +16,8 @@ const textSTyle = TextStyle(
   color: Colors.black,
   fontSize: 30,
 );
+
+const bestQuote = TextStyle(
+  color: Colors.white,
+  fontSize: 50,
+);
