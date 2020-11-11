@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyBtn extends StatelessWidget {
-  MyBtn(this.func, this.title);
+  MyBtn(this.func, this.title, this.color);
   final Function func;
   final String title;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
@@ -11,7 +12,7 @@ class MyBtn extends StatelessWidget {
         func();
       },
       child: Text(title),
-      fillColor: Colors.green,
+      fillColor: color,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
