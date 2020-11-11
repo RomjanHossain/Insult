@@ -39,13 +39,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.crop_portrait,
+            ),
             onPressed: () {
               Provider.of<Data>(context, listen: false).changeOriented(true);
             },
           ),
           IconButton(
-            icon: Icon(Icons.ac_unit),
+            icon: Icon(Icons.view_agenda),
             onPressed: () {
               Provider.of<Data>(context, listen: false).changeOriented(false);
             },
