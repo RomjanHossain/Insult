@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:insult/const.dart';
 import 'package:insult/models/allProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:insult/models/api/getResultfromAPI.dart';
 
 class Pageview extends StatefulWidget {
   @override
@@ -9,10 +11,21 @@ class Pageview extends StatefulWidget {
 
 class _PageviewState extends State<Pageview> {
   PageController _controller;
+  Insults insult = Insults();
   @override
   void initState() {
     super.initState();
     _controller = PageController();
+    // listOfInsults();
+  }
+
+  // 10 list of insults
+
+  List<String> insults = [];
+  Future listOfInsults() async {
+    String _dd = await insult.getData();
+    insults.add(_dd);
+    return insults;
   }
 
   @override
@@ -35,7 +48,20 @@ class _PageviewState extends State<Pageview> {
                   color: Colors.lightBlue,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text('jfkdjfsd'),
+                child: FutureBuilder(
+                  future: listOfInsults(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        '${snapshot.data}',
+                        style: bestQuote,
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return Text('Loading...........');
+                  },
+                ),
               ),
             );
           },

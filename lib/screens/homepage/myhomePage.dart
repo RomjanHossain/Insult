@@ -13,10 +13,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future<Insults> futureInsult;
+  Insults insult = Insults();
   @override
   void initState() {
     super.initState();
     futureInsult = fetchAlbum2();
+  }
+
+  List<String> insults = [];
+  Future listOfInsults() async {
+    String _dd = await insult.getData();
+    insults.add(_dd);
+    return insults;
   }
 
   CardController controller;

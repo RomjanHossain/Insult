@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:insult/widgets/btn.dart';
 import 'package:insult/widgets/profile_wid/customPaint.dart';
 import 'package:insult/widgets/profile_wid/myCard.dart';
+// import '../../models/api/getResultfromAPI.dart';
 
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Insults insult = Insults();
     return Stack(
       // mainAxisAlignment: MainAxisAlignment.center,
       // crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,6 +84,8 @@ class Profile extends StatelessWidget {
           left: MediaQuery.of(context).size.width / 2.6,
           child: MyBtn(() {
             print('jslkdjf');
+            // String ss = await insult.getData();
+            // print(ss);
           }, 'Log Out', Colors.blueGrey),
         )
       ],

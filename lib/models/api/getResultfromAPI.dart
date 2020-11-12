@@ -2,16 +2,31 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-String fapi = 'https://insult.mattbas.org/api/insult';
-String sapi = 'https://evilinsult.com/generate_insult.php?lang=en&type=json';
-
 class Insults {
+  String fapi = 'https://insult.mattbas.org/api/insult.json';
+  String sapi = 'https://evilinsult.com/generate_insult.php?lang=en&type=json';
   final String insult;
   Insults({this.insult});
   factory Insults.fromJson(Map<String, dynamic> json) {
     return Insults(
       insult: json['insult'],
     );
+  }
+  Future getData() async {
+    http.Response response = await http.get(fapi);
+    String data = response.body;
+    var insult = jsonDecode(data);
+    String ss = insult['insult'];
+    print(ss);
+    return ss;
+    // return
+  }
+
+  Future getData2() async {
+    http.Response response = await http.get(sapi);
+    String data = response.body;
+    var insult = jsonDecode(data);
+    return insult['insult'];
   }
 }
 
