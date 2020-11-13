@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insult/models/allProvider.dart';
+import 'package:insult/services/allProvider.dart';
 import 'package:insult/screens/homepage/homepage.dart';
 import 'package:provider/provider.dart';
 
