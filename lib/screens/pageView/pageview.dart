@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
-import 'package:insult/models/allProvider.dart';
+import 'package:insult/services/allProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
 
