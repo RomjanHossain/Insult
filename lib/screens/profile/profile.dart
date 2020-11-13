@@ -87,7 +87,29 @@ class Profile extends StatelessWidget {
             // String ss = await insult.getData();
             // print(ss);
           }, 'Log Out', Colors.blueGrey),
-        )
+        ),
+        Positioned(
+          top: 90,
+          right: 50,
+          child: Container(
+            height: 30,
+            decoration: BoxDecoration(
+              color: Colors.blue[600],
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: Center(
+              child: Text(
+                'skanthunt49',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
