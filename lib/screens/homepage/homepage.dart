@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
-import 'package:insult/models/allProvider.dart';
+import 'package:insult/services/allProvider.dart';
 import 'package:insult/screens/homepage/myhomePage.dart';
 import 'package:insult/screens/profile/profile.dart';
 import 'package:insult/screens/wordList/wordList.dart';
@@ -57,7 +57,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomBar(
         sInd: _selectedIndex,
         onp: (index) {
-          Provider.of<Data>(context, listen: false).getAllSlang();
           setState(() {
             _selectedIndex = index;
             print(_selectedIndex);
