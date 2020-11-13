@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
+import 'package:insult/screens/loginPage/oneTimeSignUp.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/screens/homepage/myhomePage.dart';
-import 'package:insult/screens/profile/profile.dart';
 import 'package:insult/screens/wordList/wordList.dart';
 import 'package:insult/screens/pageView/pageview.dart';
 import 'package:insult/widgets/navbar.dart';
@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
     MyHomePage(),
     Pageview(),
     WordList(),
-    Profile(),
+    LogInPage(),
   ];
 
   @override
