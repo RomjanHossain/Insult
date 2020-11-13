@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
-import 'package:insult/models/allProvider.dart';
+import 'package:insult/services/allProvider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
 import 'package:provider/provider.dart';
 
@@ -28,15 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   CardController controller;
-
-  // List<String> welcomeImages = [
-  //   "assets/welcome0.png",
-  //   "assets/welcome1.png",
-  //   "assets/welcome2.png",
-  //   "assets/welcome2.png",
-  //   "assets/welcome1.png",
-  //   "assets/welcome1.png"
-  // ];
 
   @override
   Widget build(BuildContext context) {
