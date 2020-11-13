@@ -8,6 +8,7 @@ class AuthServices {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final DateTime timeCreated = DateTime.now();
+  int nums;
 
   Future<User> getUser() async {
     return _auth.currentUser;
@@ -46,16 +47,30 @@ class AuthServices {
   }
 
   Future<void> createUserData(User user) {
+    // nums = nums + 1;
     DocumentReference reportRef = _db.collection('reports').doc(user.uid);
     return reportRef.set(
       {
         'uid': user.uid,
+        'number': nums,
         'isAdmin': false,
         'created': timeCreated,
         'lastActive': DateTime.now(),
       },
     );
   }
+
+  // Future<void> createUserData(User user) {
+  //   DocumentReference reportRef = _db.collection('user').doc(user.uid);
+  //   return reportRef.set(
+  //     {
+  //       'uid': user.uid,
+  //       'isAdmin': false,
+  //       'created': timeCreated,
+  //       'lastActive': DateTime.now(),
+  //     },
+  //   );
+  // }
 
   // signout
   Future<void> signOut() {
