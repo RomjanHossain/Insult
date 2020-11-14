@@ -19,6 +19,7 @@ class AuthServices {
   Future<User> annonLogin() async {
     UserCredential user = await _auth.signInAnonymously();
     createUserData(user.user);
+
     return user.user;
   }
 
