@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
+import 'package:insult/screens/loginPage/SignUp.dart';
 import 'package:insult/services/allProvider.dart';
+import 'package:insult/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
+
+AuthServices auth = AuthServices();
 
 class Pageview extends StatefulWidget {
   @override
@@ -28,8 +32,17 @@ class _PageviewState extends State<Pageview> {
     return insults;
   }
 
+  getOut() async {
+    var usr = await auth.getUser();
+    print('init GetOut');
+    if (usr == null) {
+      Navigator.pushNamed(context, LogInPage.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOut();
     return PageView.builder(
       controller: _controller,
       itemBuilder: (BuildContext context, index) {
