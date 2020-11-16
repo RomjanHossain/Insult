@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:insult/screens/loginPage/SignUp.dart';
+import 'package:insult/screens/profile/profile.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/screens/homepage/homepage.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         routes: {
           LogInPage.id: (context) => LogInPage(),
           HomePage.id: (context) => HomePage(),
+          Profile.id: (context) => Profile(),
         },
       ),
     );
