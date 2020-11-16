@@ -49,25 +49,12 @@ class _LogInPageState extends State<LogInPage> {
                     if (user != null) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => HomePage()));
+                      print(user.email);
                     }
+                    // Provider.of<Data>(context).isUser = true;
                   },
                   icon: Icon(Icons.golf_course),
                   label: Text('Sign In With GooGle'),
-                ),
-                FlatButton.icon(
-                  color: Colors.black,
-                  onPressed: () async {
-                    print('anno');
-                    // Provider.of<Data>(context).isUser = true;
-                    var user = await auth.annonLogin();
-                    if (user != null) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    }
-                    print('sAnon');
-                  },
-                  icon: Icon(Icons.euro_symbol),
-                  label: Text('Go Annoymusly'),
                 ),
                 SizedBox(
                   height: 100,
