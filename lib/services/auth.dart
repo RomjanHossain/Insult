@@ -15,13 +15,6 @@ class AuthServices {
   }
 
   Stream<User> get user => _auth.authStateChanges();
-  // anno login
-  Future<User> annonLogin() async {
-    UserCredential user = await _auth.signInAnonymously();
-    createUserData(user.user);
-
-    return user.user;
-  }
 
   // google login
   Future<User> googleSignIn() async {
@@ -53,7 +46,6 @@ class AuthServices {
     return reportRef.set(
       {
         'uid': user.uid,
-        'number': nums,
         'isAdmin': false,
         'created': timeCreated,
         'lastActive': DateTime.now(),
