@@ -26,6 +26,7 @@ class _WordListState extends State<WordList> {
   void initState() {
     for (var i = 0; i < 100; i++) {
       var name = 'noll';
+
       userList.add(User(name, 'faker.company.name()', false));
     }
     for (var i = 0; i < 4; i++) {
