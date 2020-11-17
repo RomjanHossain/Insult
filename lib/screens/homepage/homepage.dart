@@ -52,22 +52,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             foreground: Paint()..shader = linearGradient,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.crop_portrait,
-            ),
-            onPressed: () {
-              Provider.of<Data>(context, listen: false).changeOriented(true);
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.view_agenda),
-            onPressed: () {
-              Provider.of<Data>(context, listen: false).changeOriented(false);
-            },
-          ),
-        ],
+        actions: (_selectedIndex == 2 || _selectedIndex == 3)
+            ? []
+            : [
+                IconButton(
+                  icon: Icon(
+                    Icons.crop_portrait,
+                  ),
+                  onPressed: () {
+                    Provider.of<Data>(context, listen: false)
+                        .changeOriented(true);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.view_agenda),
+                  onPressed: () {
+                    Provider.of<Data>(context, listen: false)
+                        .changeOriented(false);
+                  },
+                ),
+              ],
       ),
       bottomNavigationBar: BottomBar(
         sInd: _selectedIndex,
@@ -79,6 +83,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         },
       ),
       body: HomePage.myPages.elementAt(_selectedIndex),
+      floatingActionButton: _selectedIndex == 3
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                print('hellow');
+              },
+              backgroundColor: primaryColor,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
     );
   }
 }
