@@ -102,11 +102,11 @@ class Profile extends StatelessWidget {
           Positioned(
             top: MediaQuery.of(context).size.height / 1.4,
             left: MediaQuery.of(context).size.width / 2.6,
-            child: MyBtn(() {
+            child: MyBtn(() async {
               print('jslkdjf');
               // String ss = await insult.getData();
               // print(ss);
-              _auth.signOut();
+              await _auth.signOut();
               Navigator.pushNamed(context, LogInPage.id);
             }, 'Log Out', Colors.blueGrey[800]),
           ),
