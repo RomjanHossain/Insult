@@ -7,6 +7,8 @@ import 'package:insult/services/auth.dart';
 
 AuthServices _auth = AuthServices();
 
+var userName = '';
+
 class Profile extends StatelessWidget {
   static const String id = 'proID';
 
@@ -18,6 +20,8 @@ class Profile extends StatelessWidget {
       if (usr == null) {
         Navigator.pushNamed(context, LogInPage.id);
       }
+      userName = await _auth.getUsername();
+      print(userName);
     }
 
     getOut();
@@ -111,8 +115,8 @@ class Profile extends StatelessWidget {
             }, 'Log Out', Colors.blueGrey[800]),
           ),
           Positioned(
-            top: 90,
-            right: 50,
+            top: 80,
+            right: 0,
             child: Container(
               height: 30,
               decoration: BoxDecoration(
@@ -123,12 +127,14 @@ class Profile extends StatelessWidget {
                 horizontal: 10,
               ),
               child: Center(
-                child: Text(
-                  'skanthunt49',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+                child: userName != null
+                    ? Text(
+                        userName,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    : null,
               ),
             ),
           ),
