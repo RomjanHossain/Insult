@@ -7,10 +7,15 @@ import 'package:insult/screens/homepage/myhomePage.dart';
 import 'package:insult/screens/wordList/wordList.dart';
 import 'package:insult/screens/pageView/pageview.dart';
 import 'package:insult/services/auth.dart';
+import 'package:insult/services/getData.dart';
+import 'package:insult/services/postData.dart';
+import 'package:insult/widgets/bottomSheet/bottomSheet.dart';
 import 'package:insult/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 
 AuthServices auth = AuthServices();
+GetData _data = GetData();
+PostData _post = PostData();
 
 class HomePage extends StatefulWidget {
   static const String id = 'myid';
@@ -83,11 +88,36 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         },
       ),
       body: HomePage.myPages.elementAt(_selectedIndex),
-      floatingActionButton: _selectedIndex == 3
+      floatingActionButton: (_selectedIndex == 3 || _selectedIndex == 2)
           ? null
           : FloatingActionButton(
               onPressed: () {
                 print('hellow');
+                //! getting data from DB
+                // var insults = await _data.getAllInsult();
+                // print(insults);
+                //! finish
+                //? post data
+                // var usr = await auth.getUser();
+                // await _post.newPostMethod(usr);
+                //? end post data
+                // !show bootm sheet
+                // showBottomSheet(
+                //   context: context,
+                //   builder: (context) => Container(
+                //     height: MediaQuery.of(context).size.height / 2,
+                //     color: Colors.blue,
+                //   ),
+                // );
+                // showDialog(
+                //   context: context,
+                //   child: Container(
+                //     color: Colors.blue,
+                //     height: MediaQuery.of(context).size.height / 2,
+                //   ),
+                // );
+                showModalBottomSheet(
+                    context: context, builder: (context) => MyBottomSheet());
               },
               backgroundColor: primaryColor,
               child: Icon(
