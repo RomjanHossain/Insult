@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
 import 'package:insult/screens/loginPage/SignUp.dart';
@@ -116,8 +117,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 //     height: MediaQuery.of(context).size.height / 2,
                 //   ),
                 // );
-                showModalBottomSheet(
-                    context: context, builder: (context) => MyBottomSheet());
+                showDialog(
+                  context: context,
+                  builder: (context) => MyBottomSheet(),
+                );
+                // showModalBottomSheet(
+                //     context: context, builder: (context) => MyBottomSheet());
               },
               backgroundColor: primaryColor,
               child: Icon(

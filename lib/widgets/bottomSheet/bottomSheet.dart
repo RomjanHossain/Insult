@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:insult/widgets/btn.dart';
 
 class MyBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String value;
-    return Container(
-      color: Colors.transparent,
+    return Material(
       child: Container(
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -16,7 +16,7 @@ class MyBottomSheet extends StatelessWidget {
           ),
         ),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               'Add Insult',
@@ -26,37 +26,58 @@ class MyBottomSheet extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             TextFormField(
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 20,
+                fontSize: 30,
               ),
               textInputAction: TextInputAction.done,
               maxLines: 10,
               decoration: InputDecoration(
-                  fillColor: Colors.brown,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.lightBlue,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  )),
+                border: InputBorder.none,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                ),
+                hintText: 'Your insult here....',
+                hintStyle: TextStyle(
+                  color: Colors.black54,
+                ),
+                focusColor: Colors.black,
+                // focusedBorder: InputBorder.none,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                  ),
+                ),
+                labelText: 'Insult',
+                labelStyle: TextStyle(
+                  color: Colors.black54,
+                ),
+              ),
               // autofocus: true,
               textAlign: TextAlign.center,
               onChanged: (val) {
                 value = val;
               },
             ),
-            FlatButton(
-              color: Colors.lightBlueAccent,
-              onPressed: () {
+            SizedBox(
+              height: 10,
+            ),
+            MyBtn(
+              () {
                 print(value);
-
                 Navigator.pop(context);
               },
-              child: Text('Add'),
+              'add',
+              Colors.blue,
             )
           ],
         ),
