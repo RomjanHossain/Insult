@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
+import 'package:insult/widgets/bottomSheet/bottomSheet.dart';
 import 'package:provider/provider.dart';
 
 import '../../const.dart';
