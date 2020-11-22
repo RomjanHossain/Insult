@@ -57,6 +57,10 @@ class AuthServices {
     var user = _auth.currentUser.email;
     return user.split('@')[0];
   }
+
+  Future<String> getProfilePic() async {
+    return _auth.currentUser.photoURL;
+  }
   // Future<void> createUserData(User user) {
   //   DocumentReference reportRef = _db.collection('user').doc(user.uid);
   //   return reportRef.set(
