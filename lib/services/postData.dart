@@ -28,11 +28,11 @@ class PostData {
     return doc2;
   }
 
-  Future<void> newPostMethod(User user) {
+  Future<void> newPostMethod(User user, String ins, int activeCount) {
     DocumentReference reportRef = _db.collection('insults').doc(user.uid);
     return reportRef.update(
       {
-        'post88': ['is it working?', 'romj4an62']
+        'post${activeCount + 1}': [ins, '${user.email.split('@')[0]}']
       },
     );
   }
