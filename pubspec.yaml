@@ -13,12 +13,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  alphabet_list_scroll_view: ^1.0.6
   cloud_firestore: ^0.14.3
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.18.3
   firebase_core: ^0.5.2
-  flutter_slidable: ^0.5.7
+  firebase_database: ^4.3.0
   flutter_tindercard: ^0.2.0
   google_nav_bar: ^3.1.0
   google_sign_in: ^4.5.6
