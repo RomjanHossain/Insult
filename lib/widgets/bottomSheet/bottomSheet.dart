@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:insult/services/auth.dart';
+import 'package:insult/services/postData.dart';
 import 'package:insult/widgets/btn.dart';
 
+AuthServices _auth = AuthServices();
+PostData _post = PostData();
+
 class MyBottomSheet extends StatelessWidget {
+  MyBottomSheet({this.ll});
+  final int ll;
   @override
   Widget build(BuildContext context) {
     String value;
@@ -64,16 +71,19 @@ class MyBottomSheet extends StatelessWidget {
               ),
               // autofocus: true,
               textAlign: TextAlign.center,
-              onChanged: (val) {
+              onChanged: (val) async {
                 value = val;
+                //! post data
               },
             ),
             SizedBox(
               height: 10,
             ),
             MyBtn(
-              () {
+              () async {
                 print(value);
+                var usr = await _auth.getUser();
+                await _post.newPostMethod(usr, value, ll);
                 Navigator.pop(context);
               },
               'add',
