@@ -9,14 +9,14 @@ import 'package:insult/screens/wordList/wordList.dart';
 import 'package:insult/screens/pageView/pageview.dart';
 import 'package:insult/services/auth.dart';
 import 'package:insult/services/getData.dart';
-import 'package:insult/services/postData.dart';
+// import 'package:insult/services/postData.dart';
 import 'package:insult/widgets/bottomSheet/bottomSheet.dart';
 import 'package:insult/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 
 AuthServices auth = AuthServices();
 GetData _data = GetData();
-PostData _post = PostData();
+// PostData _post = PostData();
 
 class HomePage extends StatefulWidget {
   static const String id = 'myid';
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             : [
                 IconButton(
                   icon: Icon(
-                    Icons.crop_portrait,
+                    Icons.home,
                   ),
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
@@ -92,15 +92,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       floatingActionButton: (_selectedIndex == 3 || _selectedIndex == 2)
           ? null
           : FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 print('hellow');
                 //! getting data from DB
                 // var insults = await _data.getAllInsult();
                 // print(insults);
                 //! finish
                 //? post data
-                // var usr = await auth.getUser();
-                // await _post.newPostMethod(usr);
+                var usr = await auth.getUser();
+                int ll = await _data.getLength(usr);
+                // print(ll);
                 //? end post data
                 // !show bootm sheet
                 // showBottomSheet(
@@ -119,7 +120,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 // );
                 showDialog(
                   context: context,
-                  builder: (context) => MyBottomSheet(),
+                  builder: (context) => MyBottomSheet(
+                    ll: ll,
+                  ),
                 );
                 // showModalBottomSheet(
                 //     context: context, builder: (context) => MyBottomSheet());
