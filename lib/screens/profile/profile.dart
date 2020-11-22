@@ -7,7 +7,8 @@ import 'package:insult/services/auth.dart';
 
 AuthServices _auth = AuthServices();
 
-var userName = '';
+String userName = '';
+String userProfile = '';
 
 class Profile extends StatelessWidget {
   static const String id = 'proID';
@@ -21,7 +22,8 @@ class Profile extends StatelessWidget {
         Navigator.pushNamed(context, LogInPage.id);
       }
       userName = await _auth.getUsername();
-      print(userName);
+      userProfile = await _auth.getProfilePic();
+      // print(userName);
     }
 
     getOut();
@@ -33,8 +35,9 @@ class Profile extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: CircleAvatar(
               radius: 80,
-              backgroundImage:
-                  AssetImage('assets/images/Profile/profile6.jpeg'),
+              backgroundImage: (userProfile != '')
+                  ? NetworkImage(userProfile)
+                  : AssetImage('assets/images/Profile/profile6.jpeg'),
             ),
           ),
           Align(
@@ -134,7 +137,7 @@ class Profile extends StatelessWidget {
                           color: Colors.white,
                         ),
                       )
-                    : null,
+                    : Text('cartman'),
               ),
             ),
           ),
