@@ -21,3 +21,28 @@ const bestQuote = TextStyle(
   color: Colors.white,
   fontSize: 50,
 );
+
+const wordQ = TextStyle(
+  color: Colors.white,
+  fontSize: 50,
+  letterSpacing: 1.5,
+);
+
+const nounQ = TextStyle(
+  color: Colors.black,
+  fontSize: 30,
+);
+const adjQ = TextStyle(
+  color: Colors.black,
+  fontSize: 30,
+);
+
+const exampQ = TextStyle(
+  color: Colors.black,
+  fontSize: 30,
+);
+
+const notIndb = TextStyle(
+  color: Colors.red,
+  fontSize: 16,
+);
