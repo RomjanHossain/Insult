@@ -21,18 +21,20 @@ class WordList extends StatefulWidget {
 
 class _WordListState extends State<WordList> {
   Widget textWid(List<dynamic> ew) {
+    int _nm = 0;
     List<Widget> list = List<Widget>();
     ew.forEach((element) {
+      _nm += 1;
       list.add(
         Text(
-          'Examples:\n\n${element.toString()}',
+          'Example$_nm:\n\n${element.toString()}\n',
           style: exampQ,
         ),
       );
-
       // toString().substring(1, (snapshot.value["Examples"].toString().length - 1))
     });
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: list,
     );
   }
@@ -67,14 +69,6 @@ class _WordListState extends State<WordList> {
             //? adding stream builder jfkdsjkflajsd;flaksdj
             child: Column(
               children: [
-                IconButton(
-                    icon: Icon(Icons.home),
-                    onPressed: () {
-                      List<dynamic> valL = snapshot.value["Examples"];
-                      valL.forEach((element) {
-                        print(element);
-                      });
-                    }),
                 Center(
                   child: Text(
                     snapshot.key.inCaps,
@@ -83,20 +77,20 @@ class _WordListState extends State<WordList> {
                 ),
                 (snapshot.value['Noun'] != null)
                     ? Text(
-                        'Noun:${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1))}',
+                        'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
                         style: nounQ,
                       )
                     : Text(
-                        '',
+                        '\nNoun: Not Found in Database\n',
                         style: notIndb,
                       ),
                 (snapshot.value['Adjective'] != null)
                     ? Text(
-                        'Adjective:${snapshot.value["Adjective"].toString().substring(1, (snapshot.value["Adjective"].toString().length - 1))}',
+                        'Adjective: \n${snapshot.value["Adjective"].toString().substring(1, (snapshot.value["Adjective"].toString().length - 1)).inCaps}\n',
                         style: adjQ,
                       )
                     : Text(
-                        '',
+                        'Adjective: Not Found in Database\n',
                         style: notIndb,
                       ),
               ],
@@ -123,7 +117,7 @@ class _WordListState extends State<WordList> {
               child: (snapshot.value['Examples'] != null)
                   ? textWid(snapshot.value['Examples'])
                   : Text(
-                      'Example: not in database',
+                      'Example: Not Found in Database\n',
                       style: notIndb,
                     ),
             ),
