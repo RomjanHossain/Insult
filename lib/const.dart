@@ -43,6 +43,6 @@ const exampQ = TextStyle(
 );
 
 const notIndb = TextStyle(
-  color: Colors.red,
-  fontSize: 16,
+  color: Colors.white,
+  fontSize: 20,
 );
