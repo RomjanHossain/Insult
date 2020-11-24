@@ -5,14 +5,21 @@ class GetData {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
   getAllInsult() async {
+    List<String> _allData = [];
     var doc = _db.collection('insults').get();
-    await doc.then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) {
-        element.data().forEach((key, value) {
-          print(value[0]);
-        });
-      });
-    });
+    await doc.then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (element) {
+            element.data().forEach((key, value) {
+              print(value[0]);
+              _allData.add(value[0]);
+            });
+          },
+        );
+      },
+    );
+    return _allData;
   }
 
   getLength(User usr) async {
