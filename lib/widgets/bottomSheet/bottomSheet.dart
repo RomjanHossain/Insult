@@ -81,12 +81,26 @@ class MyBottomSheet extends StatelessWidget {
             ),
             MyBtn(
               () async {
-                print(value);
+                // print(value);
+
+                // for (String ins in _fromSite) {
+                //   var usr = await _auth.getUser();
+                //   await _post.newPostMethod(usr, ins, _newLL);
+                //   _newLL += 1;
+                //   print(ins);
+                //   print(_newLL);
+                // }
+                // print(_fromSite.length);
+
+                // _fromSite.forEach((element) {
+                //   print(element);
+                // });
+
                 var usr = await _auth.getUser();
                 await _post.newPostMethod(usr, value, ll);
                 Navigator.pop(context);
               },
-              'add',
+              'Add',
               Colors.blue,
             )
           ],
