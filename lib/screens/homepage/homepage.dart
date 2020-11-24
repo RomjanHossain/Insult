@@ -63,7 +63,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             : [
                 IconButton(
                   icon: Icon(
-                    Icons.home,
+                    Icons.amp_stories,
+                    size: 30,
                   ),
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
@@ -93,7 +94,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ? null
           : FloatingActionButton(
               onPressed: () async {
-                print('hellow');
                 //! getting data from DB
                 // var insults = await _data.getAllInsult();
                 // print(insults);
@@ -101,31 +101,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 //? post data
                 var usr = await auth.getUser();
                 int ll = await _data.getLength(usr);
-                // print(ll);
+
                 //? end post data
                 // !show bootm sheet
-                // showBottomSheet(
-                //   context: context,
-                //   builder: (context) => Container(
-                //     height: MediaQuery.of(context).size.height / 2,
-                //     color: Colors.blue,
-                //   ),
-                // );
-                // showDialog(
-                //   context: context,
-                //   child: Container(
-                //     color: Colors.blue,
-                //     height: MediaQuery.of(context).size.height / 2,
-                //   ),
-                // );
+
                 showDialog(
                   context: context,
                   builder: (context) => MyBottomSheet(
                     ll: ll,
                   ),
                 );
-                // showModalBottomSheet(
-                //     context: context, builder: (context) => MyBottomSheet());
               },
               backgroundColor: primaryColor,
               child: Icon(
