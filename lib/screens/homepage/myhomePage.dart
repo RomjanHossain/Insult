@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
+import 'package:insult/services/getData.dart';
 import 'package:provider/provider.dart';
 
 import '../../const.dart';
@@ -12,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  GetData _myData = GetData();
   Future<Insults> futureInsult;
   Insults insult = Insults();
   @override
@@ -27,10 +29,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return insults;
   }
 
+  Future fromCloudFirestore() async {
+    List<String> allData = await _myData.getAllInsult();
+    // return allData;
+    print(allData.length);
+  }
+
   CardController controller;
 
   @override
   Widget build(BuildContext context) {
+    fromCloudFirestore();
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height,
