@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:insult/services/allProvider.dart';
-import 'package:insult/models/api/getResultfromAPI.dart';
 import 'package:insult/services/getData.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
@@ -19,8 +18,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _allInsultLength = 0;
   int _i = 0;
   GetData _myData = GetData();
-  Future<Insults> futureInsult;
-  Insults insult = Insults();
 
   Future fromCloudFirestore() async {
     List<String> allData = await _myData.getAllInsult();

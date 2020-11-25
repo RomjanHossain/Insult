@@ -5,7 +5,6 @@ import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/auth.dart';
 import 'package:insult/services/getData.dart';
 import 'package:provider/provider.dart';
-import 'package:insult/models/api/getResultfromAPI.dart';
 
 AuthServices auth = AuthServices();
 GetData _data = GetData();
@@ -17,7 +16,6 @@ class Pageview extends StatefulWidget {
 
 class _PageviewState extends State<Pageview> {
   PageController _controller;
-  Insults insult = Insults();
   @override
   void initState() {
     super.initState();
