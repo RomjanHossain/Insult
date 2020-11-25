@@ -20,6 +20,7 @@ const textSTyle = TextStyle(
 const bestQuote = TextStyle(
   color: Colors.white,
   fontSize: 50,
+  letterSpacing: .2,
 );
 
 const wordQ = TextStyle(
@@ -43,6 +44,10 @@ const exampQ = TextStyle(
 );
 
 const notIndb = TextStyle(
+  color: Colors.white,
+  fontSize: 20,
+);
+const loading = TextStyle(
   color: Colors.white,
   fontSize: 20,
 );
