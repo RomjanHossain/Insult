@@ -3,10 +3,12 @@ import 'package:insult/const.dart';
 import 'package:insult/screens/loginPage/SignUp.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/auth.dart';
+import 'package:insult/services/getData.dart';
 import 'package:provider/provider.dart';
 import 'package:insult/models/api/getResultfromAPI.dart';
 
 AuthServices auth = AuthServices();
+GetData _data = GetData();
 
 class Pageview extends StatefulWidget {
   @override
@@ -20,16 +22,6 @@ class _PageviewState extends State<Pageview> {
   void initState() {
     super.initState();
     _controller = PageController();
-    // listOfInsults();
-  }
-
-  // 10 list of insults
-
-  List<String> insults = [];
-  Future listOfInsults() async {
-    String _dd = await insult.getData();
-    insults.add(_dd);
-    return insults;
   }
 
   getOut() async {
@@ -40,42 +32,59 @@ class _PageviewState extends State<Pageview> {
     }
   }
 
+  getfromCloudFirestore() async {
+    dynamic data = await _data.getAllInsult();
+    // print(data[0]);
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
     getOut();
     return PageView.builder(
       controller: _controller,
-      itemBuilder: (BuildContext context, index) {
+      itemBuilder: (BuildContext context, int index0) {
         return ListView.builder(
-          itemBuilder: (BuildContext context, index) {
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: Container(
-                height: Provider.of<Data>(context).oriented
-                    ? MediaQuery.of(context).size.height * 0.8
-                    : MediaQuery.of(context).size.height * 0.5,
-                width: Provider.of<Data>(context).oriented
-                    ? MediaQuery.of(context).size.width * 0.9
-                    : MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.lightBlue,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: FutureBuilder(
-                  future: listOfInsults(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                        '${snapshot.data}',
-                        style: bestQuote,
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-                    return Text('Loading...........');
-                  },
-                ),
+          itemBuilder: (BuildContext context, int index1) {
+            return Container(
+              margin: EdgeInsets.all(10),
+              height: Provider.of<Data>(context).oriented
+                  ? MediaQuery.of(context).size.height * 0.76
+                  : MediaQuery.of(context).size.height * 0.5,
+              width: Provider.of<Data>(context).oriented
+                  ? MediaQuery.of(context).size.width * 0.9
+                  : MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(20),
               ),
+              child: FutureBuilder<dynamic>(
+                future: getfromCloudFirestore(),
+                builder: (context, snapshot) {
+                  // print('$index0 , $index1');
+                  String _ = index0.toString() + index1.toString();
+                  int _i = int.parse(_);
+                  if (snapshot.hasData) {
+                    // print(snapshot.data[1]);
+                    return Center(
+                      child: Text(
+                        '${snapshot.data[_i]}',
+                        style: bestQuote,
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return Center(
+                    child: Text(
+                      'Loading...........',
+                      style: loading,
+                    ),
+                  );
+                },
+              ),
+              // child: getfromCloudFirestore(),
             );
           },
           itemCount: 10,

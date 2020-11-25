@@ -1,38 +1,66 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insult/screens/loginPage/SignUp.dart';
+import 'package:insult/services/getData.dart';
 import 'package:insult/widgets/btn.dart';
-import 'package:insult/widgets/profile_wid/customPaint.dart';
-import 'package:insult/widgets/profile_wid/myCard.dart';
 import 'package:insult/services/auth.dart';
 
 AuthServices _auth = AuthServices();
+GetData _data = GetData();
 
-String userName = '';
-String userProfile = '';
-
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   static const String id = 'proID';
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String userName = '';
+  String userProfile = '';
+  int _allInsultAdded = 0;
+
+  @override
+  void initState() {
+    updateUser();
+    super.initState();
+  }
+
+  void updateUser() async {
+    User usr = await _auth.getUser();
+    String uN = await _auth.getUsername();
+    String uP = await _auth.getProfilePic();
+    int ia = await _data.getLength(usr);
+    setState(() {
+      userName = uN;
+      userProfile = uP;
+      _allInsultAdded = ia;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     getOut() async {
       var usr = await _auth.getUser();
-      print('init GetOut');
       if (usr == null) {
         Navigator.pushNamed(context, LogInPage.id);
       }
-      userName = await _auth.getUsername();
-      userProfile = await _auth.getProfilePic();
-      // print(userName);
     }
 
     getOut();
-
     return Scaffold(
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: AssetImage("assets/images/Background/bg2.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 140,
             child: CircleAvatar(
               radius: 80,
               backgroundImage: (userProfile != '')
@@ -40,106 +68,53 @@ class Profile extends StatelessWidget {
                   : AssetImage('assets/images/Profile/profile6.jpeg'),
             ),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 5,
-                // vertical: 10,
-              ),
-              child: CustomPaint(
-                painter: RPSCustomPainter(),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 430,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 2.2,
-                            child: MyCard(
-                              Icons.emoji_objects,
-                              'Insult added (0)',
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 2.2,
-                            child: MyCard(
-                              Icons.edit,
-                              'Word added (0)',
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 2.2,
-                            child: MyCard(
-                              Icons.whatshot,
-                              'Definition added (0)',
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 4.5,
-                            width: MediaQuery.of(context).size.width / 2.2,
-                            child: MyCard(
-                              Icons.whatshot_rounded,
-                              'example added (0)',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
           Positioned(
             top: MediaQuery.of(context).size.height / 1.4,
-            left: MediaQuery.of(context).size.width / 2.6,
-            child: MyBtn(() async {
-              print('jslkdjf');
-              // String ss = await insult.getData();
-              // print(ss);
-              await _auth.signOut();
-              Navigator.pushNamed(context, LogInPage.id);
-            }, 'Log Out', Colors.blueGrey[800]),
+            left: MediaQuery.of(context).size.width / 3.6,
+            child: Row(
+              children: [
+                MyBtn(() {
+                  showAboutDialog(
+                      context: context,
+                      applicationName: 'Insult App',
+                      applicationVersion: 'v0.0.1 (Beta Version)',
+                      applicationLegalese:
+                          '''this is beta app for testing perpose! if you find any issue with this application,you can email me `romjanhossain726526@gmail.com1`!
+                          ''');
+//                         );
+                }, 'View License', Colors.blueGrey[800]),
+                SizedBox(
+                  width: 10,
+                ),
+                MyBtn(() async {
+                  await _auth.signOut();
+                  Navigator.pushNamed(context, LogInPage.id);
+                }, 'Log Out', Colors.blueGrey[800]),
+              ],
+            ),
           ),
           Positioned(
-            top: 80,
-            right: 0,
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                color: Colors.blue[600],
-                borderRadius: BorderRadius.circular(30),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
-              child: Center(
-                child: userName != null
-                    ? Text(
-                        userName,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      )
-                    : Text('cartman'),
-              ),
-            ),
+            top: 200,
+            right: 20,
+            child: userName != null
+                ? Text(
+                    userName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  )
+                : Text('cartman'),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text('Insult Added'),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text('$_allInsultAdded'),
           ),
         ],
       ),

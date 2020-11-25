@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 
 AuthServices auth = AuthServices();
 GetData _data = GetData();
-// PostData _post = PostData();
 
 class HomePage extends StatefulWidget {
   static const String id = 'myid';
@@ -94,17 +93,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ? null
           : FloatingActionButton(
               onPressed: () async {
-                //! getting data from DB
-                // var insults = await _data.getAllInsult();
-                // print(insults);
-                //! finish
-                //? post data
                 var usr = await auth.getUser();
                 int ll = await _data.getLength(usr);
-
-                //? end post data
-                // !show bootm sheet
-
                 showDialog(
                   context: context,
                   builder: (context) => MyBottomSheet(

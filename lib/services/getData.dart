@@ -12,7 +12,7 @@ class GetData {
         querySnapshot.docs.forEach(
           (element) {
             element.data().forEach((key, value) {
-              print(value[0]);
+              // print(value[0]);
               _allData.add(value[0]);
             });
           },
@@ -26,9 +26,7 @@ class GetData {
     int length;
     var doc = _db.collection('insults').doc(usr.uid).get();
     await doc.then((DocumentSnapshot documentSnapshot) {
-      // print(documentSnapshot.data().length);
       length = documentSnapshot.data().length;
-      // return documentSnapshot.data().length;
     });
     return length;
   }
