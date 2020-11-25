@@ -35,12 +35,12 @@ class _BottomBarState extends State<BottomBar> {
                 iconColor: navIconInactive,
               ),
               GButton(
-                icon: Icons.pages,
+                icon: Icons.view_column,
                 text: 'Page',
                 iconColor: navIconInactive,
               ),
               GButton(
-                icon: Icons.list,
+                icon: Icons.view_headline,
                 text: 'words',
                 iconColor: navIconInactive,
               ),
