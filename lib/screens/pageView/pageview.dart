@@ -45,7 +45,7 @@ class _PageviewState extends State<Pageview> {
         return ListView.builder(
           itemBuilder: (BuildContext context, int index1) {
             return Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(15),
               height: Provider.of<Data>(context).oriented
                   ? MediaQuery.of(context).size.height * 0.76
                   : MediaQuery.of(context).size.height * 0.5,
@@ -53,7 +53,21 @@ class _PageviewState extends State<Pageview> {
                   ? MediaQuery.of(context).size.width * 0.9
                   : MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Colors.lightBlue,
+                color: testColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(.4),
+                    blurRadius: 15,
+                    offset: Offset(-4, -4),
+                    spreadRadius: 1,
+                  ),
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 15,
+                    offset: Offset(4, 4),
+                    spreadRadius: 1,
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FutureBuilder<dynamic>(

@@ -26,10 +26,26 @@ class _WordListState extends State<WordList> {
     ew.forEach((element) {
       _nm += 1;
       list.add(
-        Text(
-          'Example$_nm:\n\n${element.toString()}\n',
-          style: exampQ,
+        RichText(
+          text: TextSpan(
+            style: exampQ,
+            children: [
+              TextSpan(
+                  text: 'Example $_nm:\n\n',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                  )),
+              TextSpan(
+                text: '${element.toString()}\n',
+              ),
+            ],
+          ),
         ),
+        // Text(
+        //   'Example$_nm:\n\n${element.toString()}\n',
+        //   style: exampQ,
+        // ),
       );
       // toString().substring(1, (snapshot.value["Examples"].toString().length - 1))
     });
@@ -55,15 +71,30 @@ class _WordListState extends State<WordList> {
               vertical: 10,
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              gradient: LinearGradient(
-                colors: [
-                  Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                      .withOpacity(1.0),
-                  Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                      .withOpacity(1.0)
-                ],
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.red.withOpacity(0.3),
+                  blurRadius: 15,
+                  spreadRadius: 1,
+                  offset: Offset(4, 4),
+                ),
+                BoxShadow(
+                  color: Colors.grey[700].withOpacity(.6),
+                  blurRadius: 15,
+                  spreadRadius: 1,
+                  offset: Offset(-4, -4),
+                ),
+              ],
+              // gradient: LinearGradient(
+              //   colors: [
+              //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
+              //         .withOpacity(1.0),
+              //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
+              //         .withOpacity(1.0)
+              //   ],
+              // ),
+              color: testColor,
             ),
 
             //? adding stream builder jfkdsjkflajsd;flaksdj
@@ -76,18 +107,62 @@ class _WordListState extends State<WordList> {
                   ),
                 ),
                 (snapshot.value['Noun'] != null)
-                    ? Text(
-                        'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
-                        style: nounQ,
+                    ? RichText(
+                        text: TextSpan(
+                          style: nounQ,
+                          children: [
+                            TextSpan(
+                              text: 'noun\n',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.double,
+                              ),
+                            ),
+                            TextSpan(
+                                text:
+                                    '${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                )),
+                            //   Text(
+                            //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
+                            //   style: nounQ,
+                            // )
+                          ],
+                        ),
                       )
                     : Text(
                         '\nNoun: Not Found in Database\n',
                         style: notIndb,
                       ),
                 (snapshot.value['Adjective'] != null)
-                    ? Text(
-                        'Adjective: \n${snapshot.value["Adjective"].toString().substring(1, (snapshot.value["Adjective"].toString().length - 1)).inCaps}\n',
-                        style: adjQ,
+                    ? RichText(
+                        text: TextSpan(
+                          style: adjQ,
+                          children: [
+                            TextSpan(
+                              text: 'Adjective\n',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.double,
+                              ),
+                            ),
+                            TextSpan(
+                                text:
+                                    '${snapshot.value["Adjective"].toString().substring(1, (snapshot.value["Adjective"].toString().length - 1)).inCaps}\n',
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                )),
+                            //   Text(
+                            //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
+                            //   style: nounQ,
+                            // )
+                          ],
+                        ),
                       )
                     : Text(
                         'Adjective: Not Found in Database\n',
@@ -101,19 +176,29 @@ class _WordListState extends State<WordList> {
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 10,
+                vertical: 20,
               ),
+              margin: EdgeInsets.only(top: 20, left: 10, right: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                gradient: LinearGradient(
-                  colors: [
-                    Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0),
-                    Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0)
-                  ],
-                ),
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: testColor,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 5,
+                      color: Colors.white.withOpacity(.6),
+                      offset: Offset(-4, -4),
+                      spreadRadius: 1,
+                    )
+                  ]
+                  // gradient: LinearGradient(
+                  //   colors: [
+                  //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                  //         .withOpacity(1.0),
+                  //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                  //         .withOpacity(1.0)
+                  //   ],
+                  // ),
+                  ),
               child: (snapshot.value['Examples'] != null)
                   ? textWid(snapshot.value['Examples'])
                   : Text(

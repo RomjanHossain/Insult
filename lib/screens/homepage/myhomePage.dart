@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:insult/const.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/getData.dart';
 import 'package:provider/provider.dart';
@@ -62,15 +63,23 @@ class _MyHomePageState extends State<MyHomePage> {
           cardBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(
-                color: Provider.of<Data>(context).oriented
-                    ? Colors.lightBlue
-                    : Color(0xFF00b497),
+                color:
+                    Provider.of<Data>(context).oriented ? testColor : testColor,
                 borderRadius: Provider.of<Data>(context).oriented
                     ? BorderRadius.circular(15)
                     : BorderRadius.circular(25),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black,
+                    blurRadius: 15,
+                    offset: Offset(4, 4),
+                    spreadRadius: 1,
+                  ),
+                  BoxShadow(
+                    color: Colors.white.withOpacity(.4),
+                    blurRadius: 15,
+                    offset: Offset(-4, -4),
+                    spreadRadius: 1,
                   ),
                 ],
               ),
@@ -81,12 +90,44 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (snapshot.hasData) {
                     print(index);
                     // print(snapshot.data[1]);
-                    return Center(
-                      child: Text(
-                        '${snapshot.data[_i]}',
-                        style: bestQuote,
-                        textAlign: TextAlign.center,
-                      ),
+                    return Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: bestQuote,
+                              children: [
+                                TextSpan(
+                                  text: '"',
+                                  style: TextStyle(
+                                    fontSize: 70,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '${snapshot.data[_i]}',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              right: 50,
+                            ),
+                            child: Text(
+                              '--SkankHunt42',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   } else if (snapshot.hasError) {
                     return Center(child: Text('${snapshot.error}'));
