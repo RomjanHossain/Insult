@@ -12,7 +12,7 @@ class GetData {
         querySnapshot.docs.forEach(
           (element) {
             element.data().forEach((key, value) {
-              // print(value[0]);
+              
               _allData.add(value[0]);
             });
           },
@@ -25,10 +25,39 @@ class GetData {
   getLength(User usr) async {
     int length;
     var doc = _db.collection('insults').doc(usr.uid).get();
-    await doc.then((DocumentSnapshot documentSnapshot) {
-      length = documentSnapshot.data().length;
-    });
+    await doc.then(
+      (DocumentSnapshot documentSnapshot) {
+        try {
+          length = documentSnapshot.data().length;
+        } catch (e) {
+          length = 0;
+         
+        }
+      },
+    );
+   
     return length;
+  }
+
+  getOnlyFromUser(User usr) async {
+    List<String> _allData = [];
+    var doc = _db.collection('insults').doc(usr.uid).get();
+    await doc.then(
+      (DocumentSnapshot documentSnapshot) {
+        documentSnapshot.data().forEach((key, value) {
+          _allData.add(value[0]);
+        });
+        // forEach(
+        //   (element) {
+        //     element.data().forEach((key, value) {
+        //       // print(value[0]);
+        //       _allData.add(value[0]);
+        //     });
+        //   },
+        // );
+      },
+    );
+    return _allData;
   }
 
   //! this from realtime database
