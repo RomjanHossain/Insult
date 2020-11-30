@@ -105,12 +105,11 @@ class MyBottomSheet extends StatelessWidget {
               width: 100,
               child: MyBtn2(() async {
                 if (_formKey.currentState.validate()) {
-//    If all data are correct then save data to out variables
                   _formKey.currentState.save();
                   await _post.newPostMethod(usr, value, ll);
                   Navigator.pop(context);
                 }
-              }, 'Add', Colors.blue, Colors.green),
+              }, 'Add', Colors.green[300], Colors.green),
             )
           ],
         ),
