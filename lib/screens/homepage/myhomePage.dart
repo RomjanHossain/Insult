@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, snapshot) {
                   // int v = getRandomNumber();
                   if (snapshot.hasData) {
-                    print(index);
+                    // print(index);
                     // print(snapshot.data[1]);
                     return Stack(
                       children: [
