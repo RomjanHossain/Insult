@@ -13,14 +13,9 @@ class _LogInPageState extends State<LogInPage> {
   @override
   void initState() {
     super.initState();
-    isUser();
-  }
-
-  // let's see if the user already exists
-  isUser() async {
-    await auth.getUser().then((user) {
+    auth.getUser().then((user) {
       if (user != null) {
-        Navigator.pushNamed(context, HomePage.id);
+        Navigator.pushReplacementNamed(context, HomePage.id);
       }
     });
   }
@@ -47,8 +42,7 @@ class _LogInPageState extends State<LogInPage> {
                     print('Goolge clicked');
                     var user = await auth.googleSignIn();
                     if (user != null) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Navigator.pushReplacementNamed(context, HomePage.id);
                       print(user.email);
                     }
                     // Provider.of<Data>(context).isUser = true;
