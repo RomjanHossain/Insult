@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
-import 'package:insult/screens/loginPage/SignUp.dart';
 import 'package:insult/screens/profile/profile.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/screens/homepage/myhomePage.dart';
@@ -9,7 +8,6 @@ import 'package:insult/screens/wordList/wordList.dart';
 import 'package:insult/screens/pageView/pageview.dart';
 import 'package:insult/services/auth.dart';
 import 'package:insult/services/getData.dart';
-// import 'package:insult/services/postData.dart';
 import 'package:insult/widgets/bottomSheet/bottomSheet.dart';
 import 'package:insult/widgets/navbar.dart';
 import 'package:provider/provider.dart';
@@ -33,26 +31,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool isUser = false;
   int _selectedIndex = 0;
 
-  // if not logged in Kick him out
-  getOut() async {
-    var usr = await auth.getUser();
-    print('init GetOut');
-    if (usr == null) {
-      Navigator.pushNamed(context, LogInPage.id);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    getOut();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: primaryColor,
+        backgroundColor: testColor,
         title: Text(
           'Insult',
           style: TextStyle(
             letterSpacing: 2,
+            fontFamily: 'RaRaleway',
             fontSize: 40,
             foreground: Paint()..shader = linearGradient,
           ),
@@ -78,6 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   },
                 ),
               ],
+        elevation: 3,
       ),
       bottomNavigationBar: BottomBar(
         sInd: _selectedIndex,
