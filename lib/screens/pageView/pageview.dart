@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
-import 'package:insult/screens/loginPage/SignUp.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/auth.dart';
 import 'package:insult/services/getData.dart';
@@ -22,27 +21,19 @@ class _PageviewState extends State<Pageview> {
     _controller = PageController();
   }
 
-  getOut() async {
-    var usr = await auth.getUser();
-    print('init GetOut');
-    if (usr == null) {
-      Navigator.pushNamed(context, LogInPage.id);
-    }
-  }
-
   getfromCloudFirestore() async {
     dynamic data = await _data.getAllInsult();
-    // print(data[0]);
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    getOut();
     return PageView.builder(
       controller: _controller,
+      physics: BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int index0) {
         return ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemBuilder: (BuildContext context, int index1) {
             return Container(
               margin: EdgeInsets.all(15),
