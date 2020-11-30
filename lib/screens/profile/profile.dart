@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insult/const.dart';
 import 'package:insult/screens/loginPage/SignUp.dart';
 import 'package:insult/services/getData.dart';
 import 'package:insult/widgets/btn.dart';
@@ -17,8 +18,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String userName = '';
-  String userProfile = '';
   int _allInsultAdded = 0;
 
   @override
@@ -29,86 +28,235 @@ class _ProfileState extends State<Profile> {
 
   void updateUser() async {
     User usr = await _auth.getUser();
-    String uN = await _auth.getUsername();
-    String uP = await _auth.getProfilePic();
     int ia = await _data.getLength(usr);
-    setState(() {
-      userName = uN;
-      userProfile = uP;
-      _allInsultAdded = ia;
-    });
+    setState(
+      () {
+        _allInsultAdded = ia;
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var user = Provider.of<User>(context);
-
     return Stack(
       children: [
-        Positioned(
-          top: 140,
-          child: CircleAvatar(
-              radius: 80, backgroundImage: NetworkImage(user.photoURL)),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            height: size.height / 1.5,
+            decoration: BoxDecoration(
+              color: testColor,
+              borderRadius: BorderRadius.all(
+                Radius.circular(30),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.white.withOpacity(.4),
+                  offset: Offset(-4, -4),
+                  spreadRadius: 2,
+                ),
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black,
+                  offset: Offset(4, 4),
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: (_allInsultAdded == 0)
+                ? Padding(
+                    padding: EdgeInsets.only(
+                      top: 120,
+                      bottom: 100,
+                    ),
+                    child: Container(
+                      height: size.height / 2.5,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF182C61),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 5,
+                            offset: Offset(4, 4),
+                            spreadRadius: 1,
+                          ),
+                          BoxShadow(
+                            color: Colors.white.withOpacity(.4),
+                            blurRadius: 5,
+                            offset: Offset(-4, -4),
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          'You haven\'t added any insult',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Raleway',
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (_, __) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          top: 120,
+                          bottom: 100,
+                        ),
+                        child: Container(
+                          height: size.height / 2.5,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 5,
+                                offset: Offset(4, 4),
+                                spreadRadius: 1,
+                              ),
+                              BoxShadow(
+                                color: Colors.white.withOpacity(.4),
+                                blurRadius: 5,
+                                offset: Offset(-4, -4),
+                                spreadRadius: 1,
+                              ),
+                            ],
+                            color: Color(0xFF182C61),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                          ),
+                          child: FutureBuilder(
+                            future: _data.getOnlyFromUser(user),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.hasData) {
+                                return Stack(children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text('insult #${__ + 1}'),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '${snapshot.data[__]}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Raleway',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                ]);
+                              } else {
+                                return Center(child: Text('Loading........'));
+                              }
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: _allInsultAdded,
+                  ),
+          ),
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height / 1.4,
-          left: MediaQuery.of(context).size.width / 3.6,
-          child: Row(
+          top: 20,
+          left: size.width / 4,
+          child: Column(
             children: [
-              MyBtn(() {
-                showAboutDialog(
-                    context: context,
-                    applicationName: 'Insult App',
-                    applicationVersion: 'v0.0.1 (Beta Version)',
-                    applicationLegalese:
-                        '''this is beta app for testing perpose! if you find any issue with this application,you can email me `romjanhossain726526@gmail.com1`!
-                        ''');
-//                         );
-              }, 'View License', Colors.blueGrey[800]),
-              SizedBox(
-                width: 10,
+              CircleAvatar(
+                radius: 100,
+                backgroundColor: Colors.blueGrey.withOpacity(.3),
+                child: CircleAvatar(
+                  radius: 95,
+                  backgroundImage: (user.photoURL != null)
+                      ? NetworkImage(user.photoURL)
+                      : AssetImage('assets/images/profile/profile6.jpeg'),
+                ),
               ),
-              MyBtn(() async {
-                await _auth.signOut();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    LogInPage.id, (Route<dynamic> route) => false);
-              }, 'Log Out', Colors.blueGrey[800]),
+              (user.displayName != null)
+                  ? Text(
+                      user.displayName,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : Text(
+                      'Gerald Broflovski',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ],
           ),
         ),
         Positioned(
-            top: 200,
-            right: 20,
-            child: Text(
-              user.displayName,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-                fontStyle: FontStyle.italic,
+          bottom: 20,
+          left: size.width / 5,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 50,
+                width: 120,
+                child: MyBtn3(
+                  () {
+                    showAboutDialog(
+                        context: context,
+                        applicationName: 'Insult App',
+                        applicationVersion: 'v0.0.1 (Beta Version)',
+                        applicationLegalese:
+                            '''this is beta app for testing perpose! if you find any issue with this application,you can email me `romjanhossain726526@gmail.com1`!
+                              ''');
+//                         );
+                  },
+                  'View License',
+                ),
               ),
-            )),
-        Align(
-          alignment: Alignment.center,
-          child: Text('Insult Added'),
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Text('$_allInsultAdded'),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox(
-            height: 50,
-            width: 100,
-            child: MyBtn2(
-              () {
-                print('ds');
-              },
-              'Log Out',
-              Colors.blue,
-              Colors.green,
-            ),
+              SizedBox(
+                width: 10,
+              ),
+              SizedBox(
+                height: 50,
+                width: 120,
+                child: MyBtn2(
+                  () async {
+                    await _auth.signOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        LogInPage.id, (Route<dynamic> route) => false);
+                  },
+                  'Log Out',
+                  Colors.blueGrey,
+                  Colors.blueGrey[200],
+                ),
+              ),
+            ],
           ),
         )
       ],
