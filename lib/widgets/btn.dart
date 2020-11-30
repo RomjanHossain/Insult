@@ -71,3 +71,42 @@ class MyBtn2 extends StatelessWidget {
     );
   }
 }
+
+class MyBtn3 extends StatelessWidget {
+  MyBtn3(
+    this.func,
+    this.title,
+  );
+  final Function func;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 54,
+      child: OutlineButton(
+        child: Text(
+          title,
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 14,
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onPressed: () {
+          func();
+        },
+        color: Colors.white,
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: .5,
+        ),
+        highlightedBorderColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(30.0),
+        ),
+      ),
+    );
+  }
+}
