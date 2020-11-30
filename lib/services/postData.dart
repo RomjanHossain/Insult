@@ -20,6 +20,13 @@ class PostData {
 
   Future<void> newPostMethod(User user, String ins, int activeCount) {
     DocumentReference reportRef = _db.collection('insults').doc(user.uid);
+    if (activeCount == 0) {
+      return reportRef.set(
+        {
+          'post${activeCount + 1}': [ins, '${user.email.split('@')[0]}']
+        },
+      );
+    }
     return reportRef.update(
       {
         'post${activeCount + 1}': [ins, '${user.email.split('@')[0]}']
