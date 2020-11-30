@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:expansion_card/expansion_card.dart';
@@ -35,9 +34,17 @@ class _WordListState extends State<WordList> {
                   style: TextStyle(
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
+                    decoration: TextDecoration.underline,
+                    decorationStyle: TextDecorationStyle.double,
+                    decorationColor: Colors.white38,
+                    decorationThickness: 1,
                   )),
               TextSpan(
                 text: '${element.toString()}\n',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -86,14 +93,6 @@ class _WordListState extends State<WordList> {
                   offset: Offset(-4, -4),
                 ),
               ],
-              // gradient: LinearGradient(
-              //   colors: [
-              //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
-              //         .withOpacity(1.0),
-              //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
-              //         .withOpacity(1.0)
-              //   ],
-              // ),
               color: testColor,
             ),
 
@@ -114,10 +113,13 @@ class _WordListState extends State<WordList> {
                             TextSpan(
                               text: 'noun\n',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w300,
                                 fontStyle: FontStyle.italic,
+                                color: Colors.white,
                                 decoration: TextDecoration.underline,
                                 decorationStyle: TextDecorationStyle.double,
+                                decorationColor: Colors.white30,
+                                decorationThickness: .5,
                               ),
                             ),
                             TextSpan(
@@ -125,6 +127,8 @@ class _WordListState extends State<WordList> {
                                     '${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
                                 style: TextStyle(
                                   fontStyle: FontStyle.italic,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
                                 )),
                             //   Text(
                             //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
@@ -145,10 +149,13 @@ class _WordListState extends State<WordList> {
                             TextSpan(
                               text: 'Adjective\n',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white,
                                 fontStyle: FontStyle.italic,
                                 decoration: TextDecoration.underline,
                                 decorationStyle: TextDecorationStyle.double,
+                                decorationColor: Colors.white30,
+                                decorationThickness: .5,
                               ),
                             ),
                             TextSpan(
@@ -156,6 +163,8 @@ class _WordListState extends State<WordList> {
                                     '${snapshot.value["Adjective"].toString().substring(1, (snapshot.value["Adjective"].toString().length - 1)).inCaps}\n',
                                 style: TextStyle(
                                   fontStyle: FontStyle.italic,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
                                 )),
                             //   Text(
                             //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
