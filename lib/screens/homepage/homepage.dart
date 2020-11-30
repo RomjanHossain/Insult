@@ -74,7 +74,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         onp: (index) {
           setState(() {
             _selectedIndex = index;
-            print(_selectedIndex);
           });
         },
       ),
@@ -92,7 +91,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 );
               },
-              backgroundColor: primaryColor,
+              backgroundColor: testColor,
+              elevation: 7,
               child: Icon(
                 Icons.add,
                 color: Colors.white,
