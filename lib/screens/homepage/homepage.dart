@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:insult/const.dart';
 import 'package:insult/screens/profile/profile.dart';
@@ -41,7 +42,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           'Insult',
           style: TextStyle(
             letterSpacing: 2,
-            fontFamily: 'RaRaleway',
+            // fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
             fontSize: 40,
             foreground: Paint()..shader = linearGradient,
           ),
