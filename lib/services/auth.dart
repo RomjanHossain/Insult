@@ -35,7 +35,7 @@ class AuthServices {
       createUserData(userCredential.user);
       return userCredential.user;
     } catch (e) {
-      print('You got some error \n${e.toString()}');
+      // print('You got some error \n${e.toString()}');
       return null;
     }
   }
@@ -47,6 +47,8 @@ class AuthServices {
       {
         'uid': user.uid,
         'isAdmin': false,
+        'userEmail': user.email,
+        'User Name': user.displayName,
         'created': timeCreated,
         'lastActive': DateTime.now(),
       },
