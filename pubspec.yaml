@@ -24,6 +24,7 @@ dependencies:
   google_nav_bar: ^3.1.0
   google_sign_in: ^4.5.6
   http: ^0.12.2
+  line_icons: ^0.2.0
   provider: ^4.3.2+2
 
 dev_dependencies:
@@ -37,7 +38,6 @@ flutter:
     - assets/images/Profile/
     - assets/images/Background/
     - assets/icons/
-  #   - images/a_dot_ham.jpeg
   fonts:
     - family: Raleway
       fonts:
