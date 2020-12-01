@@ -12,7 +12,6 @@ class GetData {
         querySnapshot.docs.forEach(
           (element) {
             element.data().forEach((key, value) {
-              
               _allData.add(value[0]);
             });
           },
@@ -31,11 +30,10 @@ class GetData {
           length = documentSnapshot.data().length;
         } catch (e) {
           length = 0;
-         
         }
       },
     );
-   
+
     return length;
   }
 
@@ -47,28 +45,8 @@ class GetData {
         documentSnapshot.data().forEach((key, value) {
           _allData.add(value[0]);
         });
-        // forEach(
-        //   (element) {
-        //     element.data().forEach((key, value) {
-        //       // print(value[0]);
-        //       _allData.add(value[0]);
-        //     });
-        //   },
-        // );
       },
     );
     return _allData;
   }
-
-  //! this from realtime database
-  // readData() async {
-  //   var allWordsFromDatabase = databaseReference.child('Words');
-  //   return allWordsFromDatabase;
-  // databaseReference.once().then(
-  //   (DataSnapshot snapshot) {
-  //     print('Data : ${snapshot.value}');
-  //     return snapshot.value;
-  //   },
-  // );
-  // }
 }

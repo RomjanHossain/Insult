@@ -35,7 +35,6 @@ class AuthServices {
       createUserData(userCredential.user);
       return userCredential.user;
     } catch (e) {
-      // print('You got some error \n${e.toString()}');
       return null;
     }
   }
@@ -49,6 +48,8 @@ class AuthServices {
         'isAdmin': false,
         'userEmail': user.email,
         'User Name': user.displayName,
+        'user Photo': user.photoURL,
+        'user Number': user.phoneNumber,
         'created': timeCreated,
         'lastActive': DateTime.now(),
       },
@@ -63,18 +64,6 @@ class AuthServices {
   Future<String> getProfilePic() async {
     return _auth.currentUser.photoURL;
   }
-
-  // Future<void> createUserData(User user) {
-  //   DocumentReference reportRef = _db.collection('user').doc(user.uid);
-  //   return reportRef.set(
-  //     {
-  //       'uid': user.uid,
-  //       'isAdmin': false,
-  //       'created': timeCreated,
-  //       'lastActive': DateTime.now(),
-  //     },
-  //   );
-  // }
 
   // signout
   Future<void> signOut() {
