@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:insult/const.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/auth.dart';
@@ -64,18 +65,28 @@ class _PageviewState extends State<Pageview> {
               child: FutureBuilder<dynamic>(
                 future: getfromCloudFirestore(),
                 builder: (context, snapshot) {
-                  // print('$index0 , $index1');
                   String _ = index0.toString() + index1.toString();
                   int _i = int.parse(_);
                   if (snapshot.hasData) {
-                    // print(snapshot.data[1]);
-                    return Center(
-                      child: Text(
-                        '${snapshot.data[_i]}',
-                        style: bestQuote,
-                        textAlign: TextAlign.center,
+                    return Stack(children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${snapshot.data[_i]}',
+                          style: bestQuote,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    );
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: IconButton(
+                            icon: Icon(Icons.copy),
+                            onPressed: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: "${snapshot.data[_i]}"));
+                            }),
+                      )
+                    ]);
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
