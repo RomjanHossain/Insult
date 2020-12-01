@@ -53,9 +53,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ? []
             : [
                 IconButton(
-                  icon: Icon(
-                    Icons.amp_stories,
-                    size: 30,
+                  icon: SvgPicture.asset(
+                    'assets/icons/appP2.svg',
+                    color: Colors.white,
+                    height: 30,
                   ),
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
@@ -63,7 +64,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.view_agenda),
+                  icon: SvgPicture.asset(
+                    'assets/icons/appH.svg',
+                    color: Colors.white,
+                    height: 30,
+                  ),
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
                         .changeOriented(false);
@@ -98,6 +103,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               elevation: 7,
               child: Icon(
                 Icons.add,
+                size: 30,
                 color: Colors.white,
               ),
             ),
