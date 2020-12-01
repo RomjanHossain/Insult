@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:insult/const.dart';
+import 'package:line_icons/line_icons.dart';
 
 class BottomBar extends StatefulWidget {
   BottomBar({this.onp, this.sInd});
@@ -42,22 +43,22 @@ class _BottomBarState extends State<BottomBar> {
           tabBackgroundColor: navBgColor,
           tabs: [
             GButton(
-              icon: Icons.home,
+              icon: LineIcons.home,
               text: 'Home',
               iconColor: navIconInactive,
             ),
             GButton(
-              icon: Icons.view_column,
+              icon: LineIcons.folder,
               text: 'Page',
               iconColor: navIconInactive,
             ),
             GButton(
-              icon: Icons.view_headline,
+              icon: LineIcons.font,
               text: 'words',
               iconColor: navIconInactive,
             ),
             GButton(
-              icon: Icons.person,
+              icon: LineIcons.user,
               text: 'Profile',
               iconColor: navIconInactive,
             ),
