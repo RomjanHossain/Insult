@@ -39,11 +39,9 @@ class _LogInPageState extends State<LogInPage> {
                 FlatButton.icon(
                   color: Colors.black,
                   onPressed: () async {
-                    // print('Goolge clicked');
                     var user = await auth.googleSignIn();
                     if (user != null) {
                       Navigator.pushReplacementNamed(context, HomePage.id);
-                      // print(user.email);
                     }
                     // Provider.of<Data>(context).isUser = true;
                   },
