@@ -3,6 +3,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:insult/const.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/getData.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 import '../../const.dart';
@@ -22,11 +23,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future fromCloudFirestore() async {
     List<String> allData = await _myData.getAllInsult();
-    // return allData;
     setState(() {
       _allInsultLength = allData.length;
     });
-    // print(allData.length);
   }
 
   CardController controller;
@@ -88,8 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, snapshot) {
                   // int v = getRandomNumber();
                   if (snapshot.hasData) {
-                    // print(index);
-                    // print(snapshot.data[1]);
                     return Stack(
                       children: [
                         Align(
@@ -103,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   text: '"',
                                   style: TextStyle(
                                     fontSize: 70,
+                                    fontFamily: 'Raleway',
                                   ),
                                 ),
                                 TextSpan(
@@ -113,19 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         Align(
-                          alignment: Alignment.bottomRight,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              right: 50,
-                            ),
-                            child: Text(
-                              '--SkankHunt42',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ),
+                          alignment: Alignment.bottomLeft,
+                          child: IconButton(
+                              icon: Icon(Icons.copy),
+                              onPressed: () {
+                                Clipboard.setData(ClipboardData(
+                                    text: "${snapshot.data[_i]}"));
+                              }),
                         ),
                       ],
                     );
