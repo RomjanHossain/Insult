@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
-import 'package:insult/const.dart';
+import 'package:insult/screens/homepage/components/cardOft.dart';
 import 'package:insult/services/allProvider.dart';
 import 'package:insult/services/getData.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-import '../../const.dart';
 
-GetData _data = GetData();
 Random _random = Random();
 
 class MyHomePage extends StatefulWidget {
@@ -29,10 +26,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   CardController controller;
-  getfromCloudFirestore() async {
-    dynamic data = await _data.getAllInsult();
-    return data;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: TinderSwapCard(
         swipeUp: true,
         swipeDown: true,
-        orientation: AmassOrientation.BOTTOM,
+        // orientation: AmassOrientation.BOTTOM,
         totalNum: _allInsultLength,
         stackNum: 8,
         swipeEdge: 5,
@@ -60,96 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ? _size.height * 0.6
             : _size.height * 0.4,
         cardBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-              color: testColor,
-              borderRadius: Provider.of<Data>(context).oriented
-                  ? BorderRadius.circular(15)
-                  : BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 10,
-                  offset: Offset(4, 4),
-                  spreadRadius: 1,
-                ),
-                BoxShadow(
-                  color: Colors.white.withOpacity(.4),
-                  blurRadius: 10,
-                  offset: Offset(-4, -4),
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            child: FutureBuilder<dynamic>(
-              future: getfromCloudFirestore(),
-              builder: (context, snapshot) {
-                // int v = getRandomNumber();
-                if (snapshot.hasData) {
-                  return Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          // overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style: bestQuote.copyWith(
-                              fontSize:
-                                  Provider.of<Data>(context).oriented ? 50 : 35,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '"',
-                                style: TextStyle(
-                                  fontSize: 70,
-                                  fontFamily: 'Raleway',
-                                ),
-                              ),
-                              TextSpan(
-                                text: '${snapshot.data[_i]}',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: IconButton(
-                            icon: Icon(Icons.copy),
-                            onPressed: () {
-                              Clipboard.setData(
-                                  ClipboardData(text: "${snapshot.data[_i]}"));
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: testColor,
-                                  behavior: SnackBarBehavior.fixed,
-                                  duration: Duration(milliseconds: 10),
-                                  content: Text(
-                                    'Text copied!',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('${snapshot.error}'));
-                }
-                return Center(
-                  child: Text(
-                    'Loading...........',
-                    style: loading,
-                  ),
-                );
-              },
-            ),
-          );
+          return CardOfTinder(i: _i);
         },
         cardController: controller = CardController(),
         swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {},
