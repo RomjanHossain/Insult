@@ -21,7 +21,6 @@ const textSTyle = TextStyle(
 
 const bestQuote = TextStyle(
   color: Colors.white,
-  fontSize: 50,
   letterSpacing: .2,
   fontFamily: 'Raleway',
 );

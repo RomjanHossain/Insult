@@ -82,13 +82,13 @@ class _WordListState extends State<WordList> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.red.withOpacity(0.3),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                   offset: Offset(4, 4),
                 ),
                 BoxShadow(
                   color: Colors.grey[700].withOpacity(.6),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                   offset: Offset(-4, -4),
                 ),
@@ -96,7 +96,6 @@ class _WordListState extends State<WordList> {
               color: testColor,
             ),
 
-            //? adding stream builder jfkdsjkflajsd;flaksdj
             child: Column(
               children: [
                 Center(

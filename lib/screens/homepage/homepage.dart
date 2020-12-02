@@ -54,17 +54,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             : [
                 IconButton(
                   icon: SvgPicture.asset(
-                    'assets/icons/appP2.svg',
-                    color: Colors.white,
-                    height: 30,
-                  ),
-                  onPressed: () {
-                    Provider.of<Data>(context, listen: false)
-                        .changeOriented(true);
-                  },
-                ),
-                IconButton(
-                  icon: SvgPicture.asset(
                     'assets/icons/appH.svg',
                     color: Colors.white,
                     height: 30,
@@ -72,6 +61,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
                         .changeOriented(false);
+                  },
+                ),
+                IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/icons/appP2.svg',
+                    color: Colors.white,
+                    height: 30,
+                  ),
+                  onPressed: () {
+                    Provider.of<Data>(context, listen: false)
+                        .changeOriented(true);
                   },
                 ),
               ],

@@ -181,14 +181,14 @@ class _ProfileState extends State<Profile> {
         ),
         Positioned(
           top: 20,
-          left: size.width / 4,
+          left: size.width / 3.5,
           child: Column(
             children: [
               CircleAvatar(
-                radius: 100,
+                radius: 90,
                 backgroundColor: Colors.blueGrey.withOpacity(.3),
                 child: CircleAvatar(
-                  radius: 95,
+                  radius: 85,
                   backgroundImage: (user.photoURL != null)
                       ? NetworkImage(user.photoURL)
                       : AssetImage('assets/images/profile/profile6.jpeg'),
@@ -230,9 +230,9 @@ class _ProfileState extends State<Profile> {
                     showAboutDialog(
                         context: context,
                         applicationName: 'Insult App',
-                        applicationVersion: 'v0.0.1 (Beta Version)',
+                        applicationVersion: 'v0.0.3 (Beta Version)',
                         applicationLegalese:
-                            '''this is beta app for testing perpose! if you find any issue with this application,you can email me `romjanhossain726526@gmail.com1`!
+                            '''This is a beta app for testing purposes! if you find any issue with this application, you can mail me at `romjanhossain726526@gmail.com`!
                               ''');
 //                         );
                   },

@@ -73,7 +73,10 @@ class _PageviewState extends State<Pageview> {
                         alignment: Alignment.center,
                         child: Text(
                           '${snapshot.data[_i]}',
-                          style: bestQuote,
+                          style: bestQuote.copyWith(
+                            fontSize:
+                                Provider.of<Data>(context).oriented ? 50 : 35,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -84,6 +87,20 @@ class _PageviewState extends State<Pageview> {
                             onPressed: () {
                               Clipboard.setData(
                                   ClipboardData(text: "${snapshot.data[_i]}"));
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: testColor,
+                                  behavior: SnackBarBehavior.fixed,
+                                  duration: Duration(milliseconds: 10),
+                                  content: Text(
+                                    'Text copied!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
                             }),
                       )
                     ]);
