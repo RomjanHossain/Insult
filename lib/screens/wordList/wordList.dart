@@ -49,12 +49,7 @@ class _WordListState extends State<WordList> {
             ],
           ),
         ),
-        // Text(
-        //   'Example$_nm:\n\n${element.toString()}\n',
-        //   style: exampQ,
-        // ),
       );
-      // toString().substring(1, (snapshot.value["Examples"].toString().length - 1))
     });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +67,6 @@ class _WordListState extends State<WordList> {
           (_, DataSnapshot snapshot, Animation<double> animation, int x) {
         return ExpansionCard(
           title: Container(
-            // height: 300,
             padding: EdgeInsets.symmetric(
               horizontal: 10,
               vertical: 10,
@@ -95,7 +89,6 @@ class _WordListState extends State<WordList> {
               ],
               color: testColor,
             ),
-
             child: Column(
               children: [
                 Center(
@@ -129,10 +122,6 @@ class _WordListState extends State<WordList> {
                                   color: Colors.white70,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            //   Text(
-                            //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
-                            //   style: nounQ,
-                            // )
                           ],
                         ),
                       )
@@ -165,10 +154,6 @@ class _WordListState extends State<WordList> {
                                   color: Colors.white70,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            //   Text(
-                            //   'Noun: \n${snapshot.value["Noun"].toString().substring(1, (snapshot.value["Noun"].toString().length - 1)).inCaps}\n',
-                            //   style: nounQ,
-                            // )
                           ],
                         ),
                       )
@@ -179,7 +164,6 @@ class _WordListState extends State<WordList> {
               ],
             ),
           ),
-          // margin: EdgeInsetsDirectional.only(),
           children: [
             Container(
               padding: EdgeInsets.symmetric(
@@ -197,16 +181,7 @@ class _WordListState extends State<WordList> {
                       offset: Offset(-4, -4),
                       spreadRadius: 1,
                     )
-                  ]
-                  // gradient: LinearGradient(
-                  //   colors: [
-                  //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                  //         .withOpacity(1.0),
-                  //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                  //         .withOpacity(1.0)
-                  //   ],
-                  // ),
-                  ),
+                  ]),
               child: (snapshot.value['Examples'] != null)
                   ? textWid(snapshot.value['Examples'])
                   : Text(
